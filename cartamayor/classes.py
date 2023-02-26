@@ -75,5 +75,18 @@ class Match:
     pass
 
 
-class Director:
-    pass
+@dataclass
+class Match:
+    """
+    Represents a match which has a Game Mode, players (in teams or not), a deck of Cards,
+    start and end times and is controlled by the Director
+    """
+    game_mode: GameMode
+    initiative_queue: deque[Player]
+    director: Director
+    deck: deque[Card]
+    started_at: datetime
+    ended_at: Optional[datetime] = None
+
+    def __post_init__(self) -> None:
+        self.started_at = datetime.now(timezone.utc)
