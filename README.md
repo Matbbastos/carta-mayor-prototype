@@ -1,7 +1,7 @@
 # Carta Mayor Prototype
 An attempt on a prototype of a simple server-based version of the great card game Carta Mayor.
 
-----
+---
 ## Local
 For a local version of the application, follow:
 
@@ -26,7 +26,7 @@ Unittests?
 ## Database
 Detail it, add references.
 
-
+---
 # Commits
 When committing to this repository, following convention is advised:
 
@@ -37,3 +37,5 @@ When committing to this repository, following convention is advised:
 * refactor: refactored code (no new feature or bug fix)
 * revert: reverts on previous commits
 * test: updates to tests
+
+For further reference on writing good commit messages, see [Conventional Commits](www.conventionalcommits.org).
