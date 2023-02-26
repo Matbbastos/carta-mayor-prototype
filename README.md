@@ -3,7 +3,7 @@ An attempt on a prototype of a simple server-based version of the great card gam
 
 ----
 ## Local
-Para obter uma versão local da API, siga as instruções a seguir:
+For a local version of the application, follow:
 
 ### Repo and Dependencies
 ```bash
