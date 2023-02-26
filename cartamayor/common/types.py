@@ -6,10 +6,10 @@ CARD_STATS = namedtuple("STATS", ("power", "resistance"))
 
 
 class Suit(Enum):
-    CLUBS = auto()
-    HEARTS = auto()
-    SPADES = auto()
-    DIAMONDS = auto()
+    CLUBS = "♣"
+    HEARTS = "♡"
+    SPADES = "♠"
+    DIAMONDS = "♢"
 
 
 class Influence(Enum):
