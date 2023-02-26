@@ -6,6 +6,7 @@ CARD_STATS = namedtuple("STATS", ("power", "resistance"))
 
 
 class Suit(Enum):
+    """Standard french playing card suits"""
     CLUBS = "♣"
     HEARTS = "♡"
     SPADES = "♠"
@@ -21,8 +22,15 @@ class SideEffect(Enum):
     REVERSE_INITIATIVE_QUEUE = auto()
 
 
-class CardType(Enum):
-    HAND = auto()
+class PileLocation(Enum):
+    """
+    PRIVATE: cards belonging to a specific player that only they can see (hand)
+    OPEN: cards belonging to a specific player that are visible to everyone
+    HIDDEN: cards belonging to a specific player that are not visible to anyone
+    TABLE: cards that don't belong to a player but are still in the game
+    DEAD: cards that don't belong to a player and were removed from the game
+    """
+    PRIVATE = auto()
     OPEN = auto()
     HIDDEN = auto()
     TABLE = auto()
