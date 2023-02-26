@@ -7,12 +7,23 @@ from common.types import GameMode, SideEffect, PileLocation, Suit
 from common.mappings import LABEL_TO_STATS
 
 
+@dataclass(frozen=True)
 class Player:
-    pass
+    """
+    Represents a player, who is identified by their name, which cannot be changed after
+    creation
+    """
+    name: str
 
 
+@dataclass(frozen=True)
 class Team:
-    pass
+    """
+    Represents a team of 2 Players, and contains a name. Members and name cannot be changed
+    after creation
+    """
+    name: str
+    players: list[Player]
 
 
 @dataclass
@@ -71,7 +82,11 @@ class Pile(deque):
         self.owner = owner
 
 
-class Match:
+class Director:
+    """
+    Defines the actions taken by the game Director in order for the match to unfold as
+    expected
+    """
     pass
 
 
