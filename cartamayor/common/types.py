@@ -1,4 +1,8 @@
+from collections import namedtuple
 from enum import Enum, auto
+
+
+CARD_STATS = namedtuple("STATS", ("power", "resistance"))
 
 
 class Suit(Enum):
