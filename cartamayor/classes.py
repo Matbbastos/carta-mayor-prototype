@@ -45,13 +45,30 @@ class Card:
         return f'{self.suit.value}{self.label}'
 
 
-@dataclass
-class Stack:
-    card_value: str
+class Pile(deque):
+    """
+    Represents a pile of cards, in a specific location of the game, possibly belonging to a
+    player
+    """
+    def __init__(
+            self, cards: set[Card], location: PileLocation, owner: Optional[Player]
+            ) -> None:
+        """
+        Initializes pile with cards, location and owner
 
+        Args:
+            cards (set[Card]): set of cards to initialize the Pile
+            location (PileLocation): location of the pile in the game
+            owner (Optional[Player]): player that owns the pile, if any
 
-class Pile:
-    strength: str
+        Raises:
+            ValueError: if set of Cards is empty on construction
+        """
+        if not cards:
+            raise ValueError("Pile cannot be empty")
+        super().__init__(cards)
+        self.location = location
+        self.owner = owner
 
 
 class Match:
