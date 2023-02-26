@@ -29,12 +29,10 @@ class CardType(Enum):
     DEAD = auto()
 
 
-class Visibility(Enum):
-    ALL = auto()
-    NONE = auto()
-    OWNER = auto()
-
-
-class Ownership(Enum):
-    PLAYER = auto()
-    TABLE = auto()
+class GameMode(Enum):
+    """
+    FULL_MONTY: player by 2 teams of 2 players
+    FATAL_THREE_WAY: played by 3 people with no teams
+    """
+    FULL_MONTY = auto()
+    FATAL_THREE_WAY = auto()
