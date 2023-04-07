@@ -16,15 +16,6 @@ class Suit(Enum):
     DIAMONDS = "♢"
 
 
-class SideEffect(Enum):
-    """
-    STALL_INITIATIVE_QUEUE: for preventing the initiative queue to roll once
-    REVERSE_INITIATIVE_QUEUE: for reversing the direction of the initiative queue
-    """
-    STALL_INITIATIVE_QUEUE = auto()
-    REVERSE_INITIATIVE_QUEUE = auto()
-
-
 class PileLocation(Enum):
     """
     PRIVATE: cards belonging to a specific player that only they can see (hand)
