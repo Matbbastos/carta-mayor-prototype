@@ -1,8 +1,11 @@
-from collections import namedtuple
 from enum import Enum, auto
+from typing import NamedTuple
 
 
-CARD_STATS = namedtuple("STATS", ("power", "resistance"))
+class CardStats(NamedTuple):
+    """Simple structure to hold stats from a card"""
+    power: float
+    resistance: int
 
 
 class Suit(Enum):
