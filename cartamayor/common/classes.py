@@ -76,26 +76,18 @@ class Pile(deque):
         self.owner = owner
 
 
-class Director:
-    """
-    Defines the actions taken by the game Director in order for the match to unfold as
-    expected
-    """
-    pass
-
-
 @dataclass
 class Match:
     """
     Represents a match which has a Game Mode, players (in teams or not), a deck of Cards,
-    start and end times and is controlled by the Director
+    start and end times and is controlled by the Director module
     """
     game_mode: GameMode
     initiative_queue: deque[Player]
-    director: Director
     deck: deque[Card]
-    started_at: datetime
+    started_at: Optional[datetime] = None
     ended_at: Optional[datetime] = None
+    debug: bool = False
 
     def __post_init__(self) -> None:
         self.started_at = datetime.now(timezone.utc)
