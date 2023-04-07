@@ -11,7 +11,7 @@ from cartamayor.common.types import GameMode, PileLocation, Suit
 class Player:
     """
     Represents a player, who is identified by their name, which cannot be changed after
-    creation
+    creation.
     """
     name: str
 
@@ -20,7 +20,7 @@ class Player:
 class Team:
     """
     Represents a team of 2 Players, and contains a name. Members and name cannot be changed
-    after creation
+    after creation.
     """
     name: str
     players: list[Player]
@@ -28,14 +28,14 @@ class Team:
 
 @dataclass
 class Card:
-    """Represents a playing Card, which is identified by label and suit
+    """Represents a playing Card, which is identified by label and suit.
 
     Parameters:
-        label (str): label of the card, representing its rank
-        suit (Suit): suit of the card, from french standard deck
-        power (float): value to determine on top of which cards this card can be played
+        label (str): label of the card, representing its rank.
+        suit (Suit): suit of the card, from french standard deck.
+        power (float): value to determine on top of which cards this card can be played.
         resistance (float): value to determine which cards cannot be played on top of this
-            card
+            card.
     """
     label: str
     suit: Suit
@@ -43,7 +43,7 @@ class Card:
     resistance: Optional[float] = None
 
     def __post_init__(self) -> None:
-        """Assigns power and resistance to the card based on its label"""
+        """Assigns power and resistance to the card based on its label."""
         self.power, self.resistance = LABEL_TO_STATS[self.label]
 
     def __str__(self) -> str:
@@ -53,21 +53,21 @@ class Card:
 class Pile(deque):
     """
     Represents a pile of cards, in a specific location of the game, possibly belonging to a
-    player
+    player.
     """
     def __init__(
             self, cards: set[Card], location: PileLocation, owner: Optional[Player]
             ) -> None:
         """
-        Initializes pile with cards, location and owner
+        Initializes pile with cards, location and owner.
 
         Args:
-            cards (set[Card]): set of cards to initialize the Pile
-            location (PileLocation): location of the pile in the game
-            owner (Optional[Player]): player that owns the pile, if any
+            cards (set[Card]): set of cards to initialize the Pile.
+            location (PileLocation): location of the pile in the game.
+            owner (Optional[Player]): player that owns the pile, if any.
 
         Raises:
-            ValueError: if set of Cards is empty on construction
+            ValueError: if set of Cards is empty on construction.
         """
         if not cards:
             raise ValueError("Pile cannot be empty")
@@ -80,6 +80,8 @@ class Pile(deque):
 class Match:
     """
     Represents a match which has a Game Mode, players (in teams or not), a deck of Cards,
+    start and end times and is controlled by the Director module.
+
     start and end times and is controlled by the Director module
     """
     game_mode: GameMode

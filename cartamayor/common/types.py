@@ -3,13 +3,13 @@ from typing import NamedTuple
 
 
 class CardStats(NamedTuple):
-    """Simple structure to hold stats from a card"""
+    """Simple structure to hold stats from a card."""
     power: float
     resistance: int
 
 
 class Suit(Enum):
-    """Standard french playing card suits"""
+    """Standard french playing card suits."""
     CLUBS = "♣"
     HEARTS = "♡"
     SPADES = "♠"
@@ -18,11 +18,11 @@ class Suit(Enum):
 
 class PileLocation(Enum):
     """
-    PRIVATE: cards belonging to a specific player that only they can see (hand)
-    OPEN: cards belonging to a specific player that are visible to everyone
-    HIDDEN: cards belonging to a specific player that are not visible to anyone
-    TABLE: cards that don't belong to a player but are still in the game
-    DEAD: cards that don't belong to a player and were removed from the game
+    PRIVATE: cards belonging to a specific player that only they can see (hand).
+    OPEN: cards belonging to a specific player that are visible to everyone.
+    HIDDEN: cards belonging to a specific player that are not visible to anyone.
+    TABLE: cards that don't belong to a player but are still in the game.
+    DEAD: cards that don't belong to a player and were removed from the game.
     """
     PRIVATE = auto()
     OPEN = auto()
@@ -33,8 +33,8 @@ class PileLocation(Enum):
 
 class GameMode(Enum):
     """
-    FULL_MONTY: player by 2 teams of 2 players
-    FATAL_THREE_WAY: played by 3 people with no teams
+    FULL_MONTY: played by 2 teams of 2 players.
+    FATAL_THREE_WAY: played by 3 people with no teams.
     """
     FULL_MONTY = auto()
     FATAL_THREE_WAY = auto()
