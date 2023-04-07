@@ -82,7 +82,13 @@ class Match:
     Represents a match which has a Game Mode, players (in teams or not), a deck of Cards,
     start and end times and is controlled by the Director module.
 
-    start and end times and is controlled by the Director module
+    Parameters:
+        game_mode (GameMode): Game mode, as detailed in 'types' module.
+        initiative_queue (deque[Player]): queue of players to control order of play.
+        deck (deque[Card]): full deck of cards.
+        started_at (Optional[datetime]): starting timestamp of the match.
+        ended_at (Optional[datetime]): ending timestamp of the match.
+        debug (bool): debug flag. Defaults to False.
     """
     game_mode: GameMode
     initiative_queue: deque[Player]
