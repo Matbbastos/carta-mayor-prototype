@@ -1,8 +1,7 @@
 import math
-import pytest
+from collections import deque
 
 from cartamayor.common.classes import Card
-from cartamayor.common.constants import CARD_LABELS
 from cartamayor.common.types import Suit
 
 
@@ -17,11 +16,12 @@ def test_card_print() -> None:
     assert repr(Card("J", Suit.SPADES)) == "Card(label='J', suit=Suit.SPADES)"
     assert repr(Card("A", Suit.DIAMONDS)) == "Card(label='A', suit=Suit.DIAMONDS)"
 
-def test_deck_length(full_deck: list[Card]) -> None:
+
+def test_deck_length(full_deck: deque[Card]) -> None:
     assert len(full_deck) == 52
 
 
-def test_deck_power(full_deck: list[Card]) -> None:
+def test_deck_power(full_deck: deque[Card]) -> None:
     for card in full_deck:
         if card.label in "3456789":
             assert card.power == int(card.label)
@@ -37,7 +37,7 @@ def test_deck_power(full_deck: list[Card]) -> None:
             assert card.power == math.inf
 
 
-def test_deck_resistance(full_deck: list[Card]) -> None:
+def test_deck_resistance(full_deck: deque[Card]) -> None:
     for card in full_deck:
         if card.label in "3456789":
             assert card.resistance == int(card.label)
