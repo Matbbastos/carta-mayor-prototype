@@ -105,7 +105,36 @@ class Pile(deque):
         return f"{location:<9} Pile[{content}]"
 
     def contains_playable_card(self, table_pile: Pile) -> bool:
-        pass
+        """Defines whether or not a pile contains at least one playable card given the table
+        pile.
+
+        Args:
+            table_pile (Pile): Pile of cards currently in the table.
+
+        Returns:
+            bool: True if the pile has a card with power greater than or equal to the
+            resitance of the table pile's last/top card or if the table pile is empty.
+        """
+        if not table_pile:
+            return True
+        if max((card.power for card in self)) >= table_pile[-1].resistance:
+            return True
+        return False
+
+    def get_playable_cards(self, table_pile: Pile) -> set:
+        """Returns a set of the playable cards contained in the pile.
+
+        Args:
+            table_pile (Pile): Pile of cards currently in the table.
+
+        Returns:
+            set: Set of cards that have a power greater than or equal to the table pile's
+            last/top card.
+        """
+        if not table_pile:
+            return set(self)
+        return set(card for card in self if card.power >= table_pile[-1].resistance)
+
 
 
 @dataclass
