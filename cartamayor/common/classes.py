@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from collections import deque
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Iterable
 
@@ -7,28 +9,10 @@ from cartamayor.common.constants import LABEL_TO_STATS
 from cartamayor.common.types import GameMode, PileLocation, Suit
 
 
-@dataclass(frozen=True)
-class Player:
-    """
-    Represents a player, who is identified by their name, which cannot be changed after
-    creation.
-    """
-    name: str
-
-
-@dataclass(frozen=True)
-class Team:
-    """
-    Represents a team of 2 Players, and contains a name. Members and name cannot be changed
-    after creation.
-    """
-    name: str
-    players: list[Player]
-
-
-@dataclass
+@dataclass(unsafe_hash=True)
 class Card:
-    """Represents a playing Card, which is identified by label and suit.
+    """Represents a playing Card, which is identified by label and suit. This class is
+    logically immutable objects, even though they are not frozen dataclasses.
 
     Parameters:
         label (str): label of the card, representing its rank.
@@ -39,8 +23,8 @@ class Card:
     """
     label: str
     suit: Suit
-    power: Optional[float] = None
-    resistance: Optional[float] = None
+    power: float = field(default=0, compare=False)
+    resistance: float = field(default=0, compare=False)
 
     def __post_init__(self) -> None:
         """Assigns power and resistance to the card based on its label."""
