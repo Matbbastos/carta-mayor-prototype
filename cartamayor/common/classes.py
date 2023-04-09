@@ -54,8 +54,7 @@ class Card:
 
 class Pile(deque):
     """
-    Represents a pile of cards, in a specific location of the game, possibly belonging to a
-    player.
+    Represents a pile of cards, in a specific location of the game.
     """
     def __init__(
             self, location: PileLocation, cards: Iterable[Card] | None = None) -> None:
@@ -65,6 +64,37 @@ class Pile(deque):
         Args:
             location (PileLocation): location of the pile in the game.
             cards (Iterable[Card] | None): Iterable of cards to initialize the Pile.
+        """
+        self.cards = cards if cards is not None else []
+        self.location = location
+        super().__init__(self.cards)
+
+    def __eq__(self, other: Pile) -> bool:
+        """Defines equality of Pile based on content and location.
+
+        Args:
+            other (Pile): Other Pile for comparison.
+
+        Returns:
+            bool: True if location is the same and underlying content is the same (deque
+            equality), False otherwise.
+        """
+        if self.location == other.location:
+            return super().__eq__(other)
+        return False
+
+    def __ne__(self, other: Pile) -> bool:
+        """Implements the "not equals" operation to avoid fallback to deque's operation
+        (which doesn't take the 'location' into account)
+
+        Args:
+            other (Pile): Other Pile for comparison.
+
+        Returns:
+            bool: Inverse of self == other.
+        """
+        return not self == other
+
 
         Raises:
             ValueError: if set of Cards is empty on construction.
