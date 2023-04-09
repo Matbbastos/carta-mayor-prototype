@@ -180,6 +180,20 @@ class Player:
             return True
         return False
 
+
+@dataclass(frozen=True)
+class Team:
+    """
+    Represents a team of 2 Players, and contains a name. Members and name cannot be changed
+    after creation.
+    """
+    name: str
+    players: tuple[Player, Player]
+
+    def __str__(self) -> str:
+        return f"{self.name}: {self.players[0].name} | {self.players[1].name}"
+
+
 @dataclass
 class Match:
     """
