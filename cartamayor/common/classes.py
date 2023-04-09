@@ -85,17 +85,15 @@ class Match:
     Parameters:
         game_mode (GameMode): Game mode, as detailed in 'types' module.
         initiative_queue (deque[Player]): queue of players to control order of play.
-        deck (deque[Card]): full deck of cards.
-        started_at (Optional[datetime]): starting timestamp of the match.
-        ended_at (Optional[datetime]): ending timestamp of the match.
-        debug (bool): debug flag. Defaults to False.
+        deck (deque[Card]): full deck of cards to be used for the game.
+        table_pile (Pile): pile of cards in the table for the match.
+        dead_pile (Pile): pile of dead cards, removed from the game.
     """
     game_mode: GameMode
     initiative_queue: deque[Player]
     deck: deque[Card]
-    started_at: Optional[datetime] = None
-    ended_at: Optional[datetime] = None
-    debug: bool = False
+    table_pile: Pile
+    dead_pile: Pile
 
     def __post_init__(self) -> None:
         self.started_at = datetime.now(timezone.utc)
