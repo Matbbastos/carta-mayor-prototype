@@ -34,7 +34,7 @@ When committing to this repository, following convention is advised:
 * docs: updates to any documentation
 * feat: new features
 * fix: bug fixes
-* refactor: refactored code (no new feature or bug fix)
+* ref: refactored code (no new feature or bug fix)
 * revert: reverts on previous commits
 * test: updates to tests
 
