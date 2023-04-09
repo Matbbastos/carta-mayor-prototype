@@ -95,15 +95,17 @@ class Pile(deque):
         """
         return not self == other
 
+    def __repr__(self) -> str:
+        content = ", ".join(repr(item) for item in self)
+        return f"Pile({self.location}, [{content}])"
 
-        Raises:
-            ValueError: if set of Cards is empty on construction.
-        """
-        if not cards:
-            raise ValueError("Pile cannot be empty")
-        super().__init__(cards)
-        self.location = location
-        self.owner = owner
+    def __str__(self) -> str:
+        location = f"({self.location.name})"
+        content = ", ".join(str(item) for item in self)
+        return f"{location:<9} Pile[{content}]"
+
+    def contains_playable_card(self, table_pile: Pile) -> bool:
+        pass
 
 
 @dataclass
