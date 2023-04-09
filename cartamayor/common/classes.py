@@ -31,7 +31,11 @@ class Card:
         self.power, self.resistance = LABEL_TO_STATS[self.label]
 
     def __str__(self) -> str:
-        return f'{self.suit.value}{self.label}'
+        return f"{self.suit.value}{self.label}"
+
+    def __repr__(self) -> str:
+        return f"Card(label='{self.label}', suit={self.suit})"
+
 
 
 class Pile(deque):
