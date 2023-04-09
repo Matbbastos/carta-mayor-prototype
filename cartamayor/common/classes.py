@@ -1,7 +1,7 @@
 from collections import deque
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Optional
+from typing import Iterable
 
 from cartamayor.common.constants import LABEL_TO_STATS
 from cartamayor.common.types import GameMode, PileLocation, Suit
@@ -56,15 +56,13 @@ class Pile(deque):
     player.
     """
     def __init__(
-            self, cards: set[Card], location: PileLocation, owner: Optional[Player]
-            ) -> None:
+            self, location: PileLocation, cards: Iterable[Card] | None = None) -> None:
         """
         Initializes pile with cards, location and owner.
 
         Args:
-            cards (set[Card]): set of cards to initialize the Pile.
             location (PileLocation): location of the pile in the game.
-            owner (Optional[Player]): player that owns the pile, if any.
+            cards (Iterable[Card] | None): Iterable of cards to initialize the Pile.
 
         Raises:
             ValueError: if set of Cards is empty on construction.
@@ -88,12 +86,16 @@ class Match:
         deck (deque[Card]): full deck of cards to be used for the game.
         table_pile (Pile): pile of cards in the table for the match.
         dead_pile (Pile): pile of dead cards, removed from the game.
+        started_at (datetime | None): starting timestamp of the match.
+        ended_at (datetime | None): ending timestamp of the match.
     """
     game_mode: GameMode
     initiative_queue: deque[Player]
     deck: deque[Card]
     table_pile: Pile
     dead_pile: Pile
+    started_at: datetime | None = None
+    ended_at: datetime | None = None
 
     def __post_init__(self) -> None:
         self.started_at = datetime.now(timezone.utc)
