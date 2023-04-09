@@ -36,6 +36,20 @@ class Card:
     def __repr__(self) -> str:
         return f"Card(label='{self.label}', suit={self.suit})"
 
+    def is_playable_on(self, other: Card) -> bool:
+        """A card is considered playable (on top of another) if its power is greater than
+        or equal to the other's resistance.
+
+        Args:
+            other (Card): Reference card on top of which the current would be played.
+
+        Returns:
+            bool: True if the card has a power greater or equal to the other's resistance,
+            False otherwise.
+        """
+        if self.power >= other.resistance:
+            return True
+        return False
 
 
 class Pile(deque):
