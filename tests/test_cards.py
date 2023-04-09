@@ -53,6 +53,35 @@ def test_deck_resistance(full_deck: deque[Card]) -> None:
             assert card.resistance == 0
 
 
+def test_card_playability() -> None:
+    assert Card("2", Suit.CLUBS).is_playable_on(Card("3", Suit.DIAMONDS))
+    assert Card("2", Suit.CLUBS).is_playable_on(Card("K", Suit.SPADES))
+    assert Card("2", Suit.CLUBS).is_playable_on(Card("A", Suit.CLUBS))
+    assert Card("2", Suit.CLUBS).is_playable_on(Card("10", Suit.HEARTS))
+    assert Card("2", Suit.CLUBS).is_playable_on(Card("2", Suit.DIAMONDS))
+
+    assert not Card("3", Suit.CLUBS).is_playable_on(Card("A", Suit.CLUBS))
+    assert not Card("3", Suit.CLUBS).is_playable_on(Card("4", Suit.DIAMONDS))
+    assert Card("3", Suit.CLUBS).is_playable_on(Card("10", Suit.HEARTS))
+    assert Card("3", Suit.CLUBS).is_playable_on(Card("3", Suit.HEARTS))
+
+    assert not Card("K", Suit.CLUBS).is_playable_on(Card("A", Suit.DIAMONDS))
+    assert Card("K", Suit.CLUBS).is_playable_on(Card("Q", Suit.HEARTS))
+    assert Card("K", Suit.CLUBS).is_playable_on(Card("2", Suit.SPADES))
+    assert Card("K", Suit.CLUBS).is_playable_on(Card("K", Suit.CLUBS))
+
+    assert Card("10", Suit.CLUBS).is_playable_on(Card("3", Suit.HEARTS))
+    assert Card("10", Suit.CLUBS).is_playable_on(Card("A", Suit.DIAMONDS))
+    assert Card("10", Suit.CLUBS).is_playable_on(Card("2", Suit.HEARTS))
+    assert Card("10", Suit.CLUBS).is_playable_on(Card("10", Suit.CLUBS))
+
+    assert not Card("7", Suit.CLUBS).is_playable_on(Card("8", Suit.HEARTS))
+    assert Card("7", Suit.CLUBS).is_playable_on(Card("5", Suit.DIAMONDS))
+    assert Card("7", Suit.CLUBS).is_playable_on(Card("10", Suit.SPADES))
+    assert Card("7", Suit.CLUBS).is_playable_on(Card("2", Suit.CLUBS))
+    assert Card("7", Suit.CLUBS).is_playable_on(Card("7", Suit.DIAMONDS))
+
+
 def test_card_equalities() -> None:
     assert Card("2", Suit.CLUBS) == Card("2", Suit.CLUBS)
     assert Card("10", Suit.SPADES) == Card("10", Suit.SPADES)
