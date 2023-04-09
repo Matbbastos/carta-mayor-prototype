@@ -12,6 +12,10 @@ def test_card_print() -> None:
     assert str(Card("J", Suit.SPADES)) == "♠J"
     assert str(Card("A", Suit.DIAMONDS)) == "♢A"
 
+    assert repr(Card("2", Suit.CLUBS)) == "Card(label='2', suit=Suit.CLUBS)"
+    assert repr(Card("5", Suit.HEARTS)) == "Card(label='5', suit=Suit.HEARTS)"
+    assert repr(Card("J", Suit.SPADES)) == "Card(label='J', suit=Suit.SPADES)"
+    assert repr(Card("A", Suit.DIAMONDS)) == "Card(label='A', suit=Suit.DIAMONDS)"
 
 def test_deck_length(full_deck: list[Card]) -> None:
     assert len(full_deck) == 52
