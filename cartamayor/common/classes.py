@@ -136,6 +136,26 @@ class Pile(deque):
         return set(card for card in self if card.power >= table_pile[-1].resistance)
 
 
+@dataclass(frozen=True)
+class Player:
+    """
+    Represents a player, who is identified by their name, which cannot be changed after
+    creation.
+
+    Parameters:
+        name (str): Name of the player.
+        private_cards (Pile): Pile of private cards, only visible to the player.
+        open_cards (Pile): Pile of open cards, visible to all players.
+        hidden_cards (Pile): Pile of hidden cards, visible to no one.
+    """
+    name: str
+    private_cards: Pile = field(default_factory=lambda: Pile(PileLocation.PRIVATE))
+    open_cards: Pile = field(default_factory=lambda: Pile(PileLocation.OPEN))
+    hidden_cards: Pile = field(default_factory=lambda: Pile(PileLocation.HIDDEN))
+
+    def __str__(self) -> str:
+        return f"{self.name}: {self.private_cards}, {self.open_cards}, {self.hidden_cards}"
+
 
 @dataclass
 class Match:
