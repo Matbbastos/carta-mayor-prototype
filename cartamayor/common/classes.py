@@ -156,6 +156,29 @@ class Player:
     def __str__(self) -> str:
         return f"{self.name}: {self.private_cards}, {self.open_cards}, {self.hidden_cards}"
 
+    def get_source(self) -> Pile:
+        """Source defines from where the player should play their cards.
+
+        Returns:
+            Pile: Private pile, if it has cards; otherwise Open pile if it has cards;
+            else the Hidden pile.
+        """
+        return self.private_cards or self.open_cards or self.hidden_cards
+
+    def has_playable_cards(self, table_pile: Pile) -> bool:
+        """Defines whether or not the player has any playable cards in their current
+        source pile.
+
+        Args:
+            table_pile (Pile): Pile of cards currently in the table.
+
+        Returns:
+            bool: True if the player has a card with power greater than or equal to the
+            resitance of the pile's last/top card.
+        """
+        if self.get_source().contains_playable_card(table_pile):
+            return True
+        return False
 
 @dataclass
 class Match:
