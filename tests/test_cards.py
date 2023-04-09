@@ -51,3 +51,26 @@ def test_deck_resistance(full_deck: deque[Card]) -> None:
             assert card.resistance == 14
         else:
             assert card.resistance == 0
+
+
+def test_card_equalities() -> None:
+    assert Card("2", Suit.CLUBS) == Card("2", Suit.CLUBS)
+    assert Card("10", Suit.SPADES) == Card("10", Suit.SPADES)
+    assert Card("A", Suit.HEARTS) == Card("A", Suit.HEARTS)
+    assert Card("7", Suit.SPADES) == Card("7", Suit.SPADES)
+    assert Card("3", Suit.CLUBS) == Card("3", Suit.CLUBS)
+
+
+def test_card_inequalities() -> None:
+    assert Card("2", Suit.CLUBS) != Card("2", Suit.SPADES)
+    assert Card("10", Suit.SPADES) != Card("10", Suit.HEARTS)
+    assert Card("A", Suit.HEARTS) != Card("K", Suit.HEARTS)
+    assert Card("7", Suit.SPADES) != Card("8", Suit.SPADES)
+    assert Card("4", Suit.CLUBS) != Card("3", Suit.CLUBS)
+
+
+def test_cards_from_diferent_suits() -> None:
+    assert Card("2", Suit.CLUBS).label == Card("2", Suit.HEARTS).label
+    assert Card("10", Suit.CLUBS).power == Card("10", Suit.SPADES).power
+    assert Card("A", Suit.CLUBS).resistance == Card("A", Suit.DIAMONDS).resistance
+    assert Card("3", Suit.CLUBS).suit == Card("7", Suit.CLUBS).suit
