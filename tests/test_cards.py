@@ -6,15 +6,6 @@ from cartamayor.common.constants import CARD_LABELS
 from cartamayor.common.types import Suit
 
 
-@pytest.fixture()
-def full_deck() -> list[Card]:
-    deck = []
-    for suit in Suit:
-        for label in CARD_LABELS:
-            deck.append(Card(label, suit))
-    return deck
-
-
 def test_card_print() -> None:
     assert str(Card("2", Suit.CLUBS)) == "♣2"
     assert str(Card("5", Suit.HEARTS)) == "♡5"
