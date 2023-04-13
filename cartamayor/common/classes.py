@@ -135,6 +135,20 @@ class Pile(deque):
             return set(self)
         return set(card for card in self if card.power >= table_pile[-1].resistance)
 
+    def remove_cards(self, cards: Iterable[Card]) -> Pile:
+        """Removes a collection of cards from the pile.
+
+        Args:
+            cards (Iterable[Card]): Collection of cards to be removed from the pile. If any
+            card is not present in the Pile, ValueError is raised.
+
+        Returns:
+            Pile: Pile after removal of all cards from the collection.
+        """
+        for card in cards:
+            self.remove(card)
+        return self
+
 
 @dataclass(frozen=True)
 class Player:
