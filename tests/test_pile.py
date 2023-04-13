@@ -62,3 +62,12 @@ def test_playable_cards_from_pile(
         Card("5", Suit.DIAMONDS),
         Card("6", Suit.HEARTS),
         Card("7", Suit.SPADES)}
+
+
+def test_card_removal(private_pile: Pile) -> None:
+    private_pile.remove_cards([Card("2", Suit.CLUBS), Card("3", Suit.DIAMONDS)])
+    assert private_pile == Pile(PileLocation.PRIVATE, [
+        Card("10", Suit.HEARTS), Card("A", Suit.SPADES), Card("4", Suit.CLUBS)])
+
+    private_pile.remove_cards([Card("10", Suit.HEARTS), Card("A", Suit.SPADES)])
+    assert private_pile == Pile(PileLocation.PRIVATE, [Card("4", Suit.CLUBS)])
