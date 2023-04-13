@@ -79,3 +79,10 @@ def player_with_cards() -> Player:
         Card("10", Suit.SPADES),
         Card("K", Suit.SPADES)])
     return player
+
+
+@pytest.fixture
+def initiative_queue() -> deque[Player]:
+    return deque([
+        Player("Player One"), Player("Player 2"),
+        Player("Third Player"), Player("4th Player")])
