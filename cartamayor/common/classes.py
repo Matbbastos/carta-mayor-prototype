@@ -231,5 +231,13 @@ class Match:
     started_at: datetime | None = None
     ended_at: datetime | None = None
 
-    def __post_init__(self) -> None:
+    def __str__(self) -> str:
+        started_str = "not started"
+        if self.started_at is not None:
+            started_str = f"""started at {self.started_at.strftime("%Y-%m-%d %Hh%M")}"""
+        return (
+            f"{' '.join(self.game_mode.name.split('_'))} {started_str} - "
+            f"[{', '.join(player.name for player in self.initiative_queue)}] - "
+            f"Top table card: {self.table_pile[-1]} - # Dead: {len(self.dead_pile)}")
+
         self.started_at = datetime.now(timezone.utc)
