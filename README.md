@@ -1,5 +1,5 @@
 # Carta Mayor Prototype
-An attempt on a prototype of a simple server-based version of the great card game Carta Mayor.
+An attempt on a prototype of a simple terminal-based version of the great card game Carta Mayor.
 
 ---
 ## Local
@@ -12,19 +12,23 @@ For a local version of the application, follow:
 # go to dev branch
 # start virtualenv
 # install dependencies
+# set env vars
 ```
 
 ### Execution
 ```bash
-# update the DB
 # run the thing
 ```
 
 ### Unit Tests
-Unittests?
+The application is tested using `pytest` and the tests are all grouped under the [tests](/tests/) directory.
 
-## Database
-Detail it, add references.
+In order to execute the available tests, use the following (from the root directory of the project):
+```bash
+python -m pytest tests/                                         # executes all available tests
+python -m pytest tests/test_card.py                             # executes the tests in 'test_card.py'
+python -m pytest tests/test_card.py::test_card_playability      # executes only 'test_card_playability' from 'test_card.py'
+```
 
 ---
 # Commits
