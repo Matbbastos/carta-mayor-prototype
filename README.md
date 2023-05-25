@@ -20,6 +20,12 @@ For a local version of the application, follow:
 # run the thing
 ```
 
+If you'd like to see the logs during the execution, use the following in a new terminal:
+```bash
+tail -f logs/info.log       # -f provides live feed of the file
+tail -fn 20 logs/debug.log  # -n sets the amount of lines to show
+```
+
 ### Unit Tests
 The application is tested using `pytest` and the tests are all grouped under the [tests](/tests/) directory.
 
