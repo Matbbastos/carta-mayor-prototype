@@ -112,3 +112,8 @@ class Director:
             Pile(PileLocation.TABLE),
             Pile(PileLocation.DEAD))
 
+    def start_match(self) -> None:
+        """Calls for the creation of the match object, then starts said match."""
+        self.match = self._create_match()
+        self.match.start()
+
