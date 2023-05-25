@@ -1,8 +1,9 @@
 from collections import deque
 from datetime import datetime
 
-from cartamayor.common.classes import Card, Match, Player, Pile
+from cartamayor.common.classes import Card, Player, Pile
 from cartamayor.common.types import GameMode, PileLocation, Suit
+from cartamayor.match import Match
 
 
 def test_match_print(
