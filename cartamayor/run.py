@@ -1,3 +1,4 @@
+#! /usr/bin/env python3.11
 import json
 import logging
 import logging.config
