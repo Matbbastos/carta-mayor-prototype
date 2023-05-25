@@ -1,8 +1,5 @@
 def welcome_users() -> None:
-    print(
-        """Hello there, stranger! Ready to play?\n"""
-        """Hit "Enter" to start a match or "Ctrl+C" to leave""")
-    input("> ")
+    print("Hello there, stranger! Ready to play?")
 
 
 def prompt_for_game_mode() -> str:
