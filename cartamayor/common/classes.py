@@ -2,11 +2,10 @@ from __future__ import annotations
 
 from collections import deque
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
 from typing import Iterable
 
 from cartamayor.common.constants import LABEL_TO_STATS
-from cartamayor.common.types import GameMode, PileLocation, Suit
+from cartamayor.common.types import PileLocation, Suit
 
 
 @dataclass(unsafe_hash=True)
