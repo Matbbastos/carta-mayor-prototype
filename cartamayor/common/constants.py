@@ -1,8 +1,20 @@
 import math
-from common.types import CardStats
+from common.types import CardStats, GameMode, PileLocation
 
 
 CARD_LABELS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+
+INITIAL_PILE_SIZES = {
+    GameMode.FATAL_THREE_WAY: {
+        PileLocation.PRIVATE: 7,
+        PileLocation.OPEN: 5,
+        PileLocation.HIDDEN: 5,
+        PileLocation.DEAD: 1},
+    GameMode.FULL_MONTY: {
+        PileLocation.PRIVATE: 5,
+        PileLocation.OPEN: 4,
+        PileLocation.HIDDEN: 4}}
+
 
 LABEL_TO_STATS = {
     "2": CardStats(power=math.inf, resistance=0),
