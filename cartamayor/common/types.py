@@ -38,3 +38,9 @@ class GameMode(Enum):
     """
     FULL_MONTY = auto()
     FATAL_THREE_WAY = auto()
+
+    def __eq__(self, other) -> bool:
+        return self.name == other.name
+
+    def __hash__(self) -> int:
+        return Enum.__hash__(self)
