@@ -7,7 +7,7 @@ from cartamayor.match import Match
 
 
 def test_match_print(
-        initiative_queue: deque[Player], full_deck: deque[Card], table_pile: Pile) -> None:
+        initiative_queue: deque[Player], full_deck: list[Card], table_pile: Pile) -> None:
     full_mounty = Match(
         GameMode.FULL_MONTY,
         initiative_queue,
