@@ -1,22 +1,45 @@
 {
-  "formatters": {
-    "brief": {
-      "datefmt": "%Y-%m-%d %H:%M:%S",
-      "format": "%(asctime)s    %(levelname)-8.8s - %(filename)-20s: %(message)s"
-    }
-  },
-  "handlers": {
-    "info_console": {
-      "class": "logging.StreamHandler",
-      "formatter": "brief",
-      "level": "DEBUG"
-    }
-  },
-  "root": {
-    "handlers": [
-      "info_console"
-    ],
-    "level": "DEBUG"
-  },
-  "version": 1
+    "formatters": {
+        "brief": {
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+            "format": "%(asctime)s    %(levelname)-8.8s - %(filename)-20s: %(message)s"
+        },
+        "complete": {
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+            "format": "%(asctime)s    %(levelname)-8.8s - %(filename)-20s (%(funcName)s): %(message)s. <At line: %(lineno)d>"
+        }
+    },
+    "handlers": {
+        "info_console": {
+            "class": "logging.StreamHandler",
+            "formatter": "brief",
+            "level": "DEBUG"
+        },
+        "info_file": {
+            "backupCount": 10,
+            "class": "logging.handlers.RotatingFileHandler",
+            "encoding": "utf8",
+            "filename": "./logs/info.log",
+            "formatter": "brief",
+            "level": "INFO",
+            "maxBytes": 5242880
+        },
+        "debug_file": {
+            "backupCount": 10,
+            "class": "logging.handlers.RotatingFileHandler",
+            "encoding": "utf8",
+            "filename": "./logs/debug.log",
+            "formatter": "complete",
+            "level": "DEBUG",
+            "maxBytes": 5242880
+        }
+    },
+    "root": {
+        "handlers": [
+            "info_file",
+            "debug_file"
+        ],
+        "level": "DEBUG"
+    },
+    "version": 1
 }
