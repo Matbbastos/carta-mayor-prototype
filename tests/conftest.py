@@ -3,12 +3,12 @@ from collections import deque
 
 from cartamayor.common.classes import Card, Pile, Player
 from cartamayor.common.types import PileLocation, Suit
-from cartamayor.director import build_deck
+from cartamayor.director import Director
 
 
 @pytest.fixture
-def full_deck() -> deque[Card]:
-    return build_deck()
+def full_deck() -> list[Card]:
+    return Director.build_deck()
 
 
 @pytest.fixture
