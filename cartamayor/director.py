@@ -72,18 +72,21 @@ class Director:
         else:
             raise ValueError("Invalid Game Mode selected")
 
-    def _create_teams_and_players(self) -> None:
+    def _create_teams_and_players(self, game_mode: GameMode) -> None:
         """
         Use interface to set team and player names, in order. Values are stored as
         Director attributes.
 
+        Args:
+            game_mode (GameMode): Selected game mode for the game.
+
         Raises:
             AttributeError: If game mode is not correctly set.
         """
-        if self.game_mode == GameMode.FATAL_THREE_WAY:
+        if game_mode == GameMode.FATAL_THREE_WAY:
             self.teams = None
             self.players = [Player(name) for name in prompt_for_FTW_players()]
-        elif self.game_mode == GameMode.FULL_MONTY:
+        elif game_mode == GameMode.FULL_MONTY:
             self.players = None
             self.teams = tuple(
                 Team(team_name, (Player(players[0]), Player(players[1])))
@@ -120,10 +123,10 @@ class Director:
         Returns:
             Match: New match to be controlled by the Director.
         """
-        self.game_mode = self._select_game_mode()
-        self._create_teams_and_players()
+        game_mode = self._select_game_mode()
+        self._create_teams_and_players(game_mode)
         return Match(
-            self.game_mode,
+            game_mode,
             self._generate_initiative_queue(),
             self.build_deck(),
             Pile(PileLocation.TABLE),
