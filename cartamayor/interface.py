@@ -4,8 +4,8 @@ def welcome_users() -> None:
 
 def prompt_for_game_mode() -> str:
     print(
-        """Type "FTW" for a Fatal Three Way match, or "FM" for a Full Monty, """
-        """then hit "Enter""")
+        '''Type "FTW" for a Fatal Three Way match, or "FM" for a Full Monty, '''
+        '''then hit "Enter"''')
     game_mode = input("> ")
     if game_mode not in {"FTW", "FM"}:
         print("Oops, let's try that again..")
