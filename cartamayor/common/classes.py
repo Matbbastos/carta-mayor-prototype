@@ -205,20 +205,21 @@ class Player:
         """
         return self.private_cards or self.open_cards or self.hidden_cards
 
-    def has_playable_cards(self, table_pile: Pile) -> bool:
-        """Defines whether or not the player has any playable cards in their current
-        source pile.
+    def get_playable_cards(self, table_pile: Pile) -> set[Card]:
+        """Return the set of playable cards that the player has.
+
+        Note: Hidden piles are always considered completely playable.
 
         Args:
             table_pile (Pile): Pile of cards currently in the table.
 
         Returns:
-            bool: True if the player has a card with power greater than or equal to the
-            resitance of the pile's last/top card.
+            set[Card]: Set of cards that from which the player can choose to play.
         """
-        if self.get_source().contains_playable_card(table_pile):
-            return True
-        return False
+        source = self.get_source()
+        if source.location == PileLocation.HIDDEN:
+            return {card for card in source}
+        return source.get_playable_cards(table_pile)
 
 
 @dataclass(frozen=True)
