@@ -113,3 +113,6 @@ class Match:
             self.initiative_queue.reverse()
         return self
 
+    def finish(self) -> Match:
+        self.ended_at = datetime.now()
+        return self
