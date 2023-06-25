@@ -10,8 +10,8 @@ from cartamayor.common.types import PileLocation, Suit
 
 @dataclass(unsafe_hash=True)
 class Card:
-    """Represents a playing Card, which is identified by label and suit. This class is
-    logically immutable objects, even though they are not frozen dataclasses.
+    """A playing Card, which is identified by label and suit. Objects from this class are
+    logically immutable, even though the class is not a frozen dataclasse.
 
     Parameters:
         label (str): label of the card, representing its rank.
@@ -26,7 +26,7 @@ class Card:
     resistance: float = field(default=0, compare=False)
 
     def __post_init__(self) -> None:
-        """Assigns power and resistance to the card based on its label."""
+        """Assign power and resistance to the card based on its label."""
         self.power, self.resistance = LABEL_TO_STATS[self.label]
 
     def __str__(self) -> str:
@@ -53,12 +53,12 @@ class Card:
 
 class Pile(deque):
     """
-    Represents a pile of cards, in a specific location of the game.
+    A pile of cards, in a specific location of the game.
     """
     def __init__(
             self, location: PileLocation, cards: Iterable[Card] | None = None) -> None:
         """
-        Initializes pile with cards, location and owner.
+        Initialize pile with cards, location and owner.
 
         Args:
             location (PileLocation): location of the pile in the game.
@@ -69,7 +69,7 @@ class Pile(deque):
         super().__init__(self.cards)
 
     def __eq__(self, other: Pile) -> bool:
-        """Defines equality of Pile based on content and location.
+        """Define equality of Pile based on content and location.
 
         Args:
             other (Pile): Other Pile for comparison.
@@ -83,7 +83,7 @@ class Pile(deque):
         return False
 
     def __ne__(self, other: Pile) -> bool:
-        """Implements the "not equals" operation to avoid fallback to deque's operation
+        """Implement the "not equals" operation to avoid fallback to deque's operation
         (which doesn't take the 'location' into account)
 
         Args:
@@ -104,7 +104,7 @@ class Pile(deque):
         return f"{location:<9} Pile[{content}]"
 
     def contains_playable_card(self, table_pile: Pile) -> bool:
-        """Defines whether or not a pile contains at least one playable card given the table
+        """Define whether or not a pile contains at least one playable card given the table
         pile.
 
         Args:
@@ -121,7 +121,7 @@ class Pile(deque):
         return False
 
     def get_playable_cards(self, table_pile: Pile) -> set:
-        """Returns a set of the playable cards contained in the pile.
+        """Return a set of the playable cards contained in the pile.
 
         Args:
             table_pile (Pile): Pile of cards currently in the table.
@@ -135,7 +135,7 @@ class Pile(deque):
         return set(card for card in self if card.power >= table_pile[-1].resistance)
 
     def remove_cards(self, cards: Iterable[Card]) -> Pile:
-        """Removes a collection of cards from the pile.
+        """Remove a collection of cards from the pile.
 
         Args:
             cards (Iterable[Card]): Collection of cards to be removed from the pile. If any
@@ -152,8 +152,7 @@ class Pile(deque):
 @dataclass(frozen=True)
 class Player:
     """
-    Represents a player, who is identified by their name, which cannot be changed after
-    creation.
+    A player who is identified by their name, which cannot be changed after creation.
 
     Parameters:
         name (str): Name of the player.
@@ -170,7 +169,8 @@ class Player:
         return f"{self.name}: {self.private_cards}, {self.open_cards}, {self.hidden_cards}"
 
     def get_source(self) -> Pile:
-        """Source defines from where the player should play their cards.
+        """Get the current card source for the player, i.e. from where the player should
+        play their cards.
 
         Returns:
             Pile: Private pile, if it has cards; otherwise Open pile if it has cards;
@@ -197,8 +197,8 @@ class Player:
 @dataclass(frozen=True)
 class Team:
     """
-    Represents a team of 2 Players, and contains a name. Members and name cannot be changed
-    after creation.
+    A team of 2 Players, containing a name. Members and name cannot be changed after
+    creation.
     """
     name: str
     players: tuple[Player, Player]

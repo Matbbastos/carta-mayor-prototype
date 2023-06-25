@@ -13,8 +13,8 @@ from common.types import GameMode
 @dataclass
 class Match:
     """
-    Represents a match which has a Game Mode, players (in teams or not), a deck of Cards,
-    start and end times and is controlled by the Director module.
+    A match which has a Game Mode, players (in teams or not), a deck of Cards, start and end
+    times and is controlled by the Director module.
 
     Parameters:
         game_mode (GameMode): Game mode, as detailed in 'types' module.
@@ -82,7 +82,7 @@ class Match:
 
     def start(self) -> Match:
         """
-        Set starting attributes.
+        Set starting attributes and execute auto-bambam.
         """
         # TODO: implement starting function
         self.started_at = datetime.now()

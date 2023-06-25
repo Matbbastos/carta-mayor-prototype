@@ -39,7 +39,7 @@ class Director:
 
     @classmethod
     def build_deck(cls) -> list[Card]:
-        """Builds the deck of cards to be used during the match.
+        """Build the deck of cards to be used during the match.
 
         Returns:
             list[Card]: deck of 52 cards, ace to king from all 4 suits.
@@ -52,7 +52,7 @@ class Director:
         return deck
 
     def _select_game_mode(self) -> GameMode:
-        """Uses interface to define the game mode (Full Monty or Fatal Three Way).
+        """Use interface to define the game mode (Full Monty or Fatal Three Way).
 
         Raises:
             ValueError: If invalid game mode is selected.
@@ -74,7 +74,7 @@ class Director:
 
     def _create_teams_and_players(self) -> None:
         """
-        Uses interface to set team and player names, in order. Values are stored as
+        Use interface to set team and player names, in order. Values are stored as
         Director attributes.
 
         Raises:
@@ -115,7 +115,7 @@ class Director:
             raise AttributeError("No valid Teams or Players found, both are None")
 
     def _create_match(self) -> Match:
-        """Creates a match after selecting a game mode, players/teams and builing a deck.
+        """Create a match after selecting a game mode, players/teams and builing a deck.
 
         Returns:
             Match: New match to be controlled by the Director.
@@ -130,7 +130,7 @@ class Director:
             Pile(PileLocation.DEAD))
 
     def start_match(self) -> None:
-        """Calls for the creation of the match object, then starts said match."""
+        """Create the match object, then start it."""
         self.match = self._create_match()
         self.match.start()
 
