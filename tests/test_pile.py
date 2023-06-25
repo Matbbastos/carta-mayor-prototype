@@ -71,3 +71,11 @@ def test_card_removal(private_pile: Pile) -> None:
 
     private_pile.remove_cards([Card("10", Suit.HEARTS), Card("A", Suit.SPADES)])
     assert private_pile == Pile(PileLocation.PRIVATE, [Card("4", Suit.CLUBS)])
+
+
+def test_masking(hidden_pile: Pile, dead_pile: Pile) -> None:
+    assert str(hidden_pile) == "(HIDDEN)  Pile[♡4, ♢8, ♠10, ♠K]"
+    assert str(dead_pile) == "(DEAD)    Pile[♡2, ♠2, ♣9, ♡9, ♠9, ♢9]"
+
+    assert str(hidden_pile.masked()) == "(HIDDEN)  Pile[▇, ▇, ▇, ▇]"
+    assert str(dead_pile.masked()) == "(DEAD)    Pile[▇, ▇, ▇, ▇, ▇, ▇]"
