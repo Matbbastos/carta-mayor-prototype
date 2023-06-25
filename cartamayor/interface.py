@@ -141,3 +141,23 @@ def get_table_display_details(
     return (table_pile_counter, result, dead_pile_counter)
 
 
+def show_table(
+        table_pile_details: tuple[int, list[Card | None]],
+        dead_pile_length: int) -> None:
+    table_pile_size, cards_to_display, dead_pile_size = get_table_display_details(
+        table_pile_details, dead_pile_length)
+    JUSTIFY_MARGIN = 9
+    display_lines = [
+        "┌────────────────────────────┐",
+        f"│       TABLE ({table_pile_size}): {cards_to_display[0].ljust(JUSTIFY_MARGIN)}│"
+        ]
+    for card in cards_to_display[1:-1]:
+        display_lines.append(f"│         ┆         {card.ljust(JUSTIFY_MARGIN)}│")
+    display_lines.extend([
+        f"│         └         {cards_to_display[-1].ljust(JUSTIFY_MARGIN)}│",
+        "└────────────────────────────┘",
+        f"           DEAD ({dead_pile_size})"
+        ])
+    print("\n".join(display_lines))
+
+
