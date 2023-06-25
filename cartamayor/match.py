@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import random
 from collections import deque
 from dataclasses import dataclass
@@ -52,6 +53,7 @@ class Match:
         Note: Deck is not emptied for shuffling.
         """
         random.shuffle(self.deck)
+        logging.debug(f"Initial deck order: {', '.join(str(card) for card in self.deck)}")
 
         last_hidden_index = 0
         for index, player in enumerate(self.initiative_queue):
