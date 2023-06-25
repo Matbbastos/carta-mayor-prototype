@@ -137,3 +137,7 @@ class Director:
         self.match = self._create_match()
         self.match.start()
 
+    @check_match
+    def get_next_player(self) -> Player:
+        return self.match.initiative_queue[0]
+
