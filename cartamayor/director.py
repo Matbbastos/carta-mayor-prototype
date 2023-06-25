@@ -5,7 +5,7 @@ from collections import deque
 from dataclasses import dataclass
 
 from common.classes import Card, Pile, Player, Team
-from common.constants import CARD_LABELS
+from common.constants import CARD_LABELS, MAX_VISIBLE_CARDS
 from common.types import GameMode, PileLocation, Suit
 from interface import prompt_for_game_mode, prompt_for_FTW_players, prompt_for_FM_teams
 from match import Match
@@ -140,4 +140,50 @@ class Director:
     @check_match
     def get_next_player(self) -> Player:
         return self.match.initiative_queue[0]
+
+    def get_table_pile_display(
+            self, latest_play: list[Card | None]) -> tuple[int, list[Card | None]]:
+        """
+        Compute which cards from the table pile should be visible and the pile size, for
+        diplay purposes.
+
+        This function considers MAX_VISIBLE_CARDS constant for the maximum number of cards
+        that can be displayed on the table at any point. This means that if less cards than
+        that are to be displayed, the remaining will be filled with a "None" for each
+        previous card in the pile (if any), until MAX_VISIBLE_CARDS is achieved (if
+        possible).
+
+        Note: This function assumes the pile was killed if that was supposed to happen. That
+        is, the function assumes no grouping of 4 equally labeled cards are present in the
+        pile.
+
+        Args:
+            latest_play (list[Card]): All cards that were played in the latest turn, in
+            order of play.
+            Note: it should only have more than 1 card if they have the same label.
+
+        Returns:
+            tuple[int, list[Card | None]]: length of the table pile and a list of the cards
+            that should be visible. "None" replaces cards not visible that are below the
+            MAX_VISIBLE_CARDS limit.
+        """
+        visible_cards: list[Card | None]
+        visible_cards = latest_play[::-1]
+        table_without_last_play = list(self.match.table_pile)[:-len(latest_play)]
+        if self.match.control_flags["show_previous_play"]:
+            for card in table_without_last_play[-1:-4:-1]:
+                if card.label == "2":
+                    visible_cards.append(card)
+                else:
+                    break
+        else:
+            for card in table_without_last_play[-1:-3:-1]:
+                if card.label == visible_cards[0].label:
+                    visible_cards.append(card)
+        visibility = len(visible_cards)
+        masked_table = list(self.match.table_pile)[:-visibility]
+        if visibility < MAX_VISIBLE_CARDS:
+            visible_cards.extend(
+                [None]*min(len(masked_table), MAX_VISIBLE_CARDS-visibility))
+        return (len(self.match.table_pile), visible_cards)
 
