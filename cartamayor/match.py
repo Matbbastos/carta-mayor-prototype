@@ -91,4 +91,5 @@ class Match:
         """
         # TODO: implement starting function
         self.started_at = datetime.now()
+        self.auto_bambam()
         return self
