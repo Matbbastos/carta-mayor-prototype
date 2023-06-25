@@ -100,8 +100,20 @@ class Pile(deque):
         return f"Pile({self.location}, [{content}])"
 
     def __str__(self) -> str:
+        return self._build_display_str(str(item) for item in self)
+
+    def _build_display_str(self, pack: Iterable[str]) -> str:
+        """
+        Abstract the construction of a display string to get any iterable string input.
+
+        Args:
+            pack (Iterable[str]): Packed content to be placed inside the "Pile[]" section.
+
+        Returns:
+            str: Pile representation of the content inside 'pack', along with its location.
+        """
+        content = ", ".join(pack)
         location = f"({self.location.name})"
-        content = ", ".join(str(item) for item in self)
         return f"{location:<9} Pile[{content}]"
 
     def contains_playable_card(self, table_pile: Pile) -> bool:
