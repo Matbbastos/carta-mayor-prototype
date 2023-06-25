@@ -27,7 +27,7 @@ def main(args):
     director = Director()
     director.start_match()
     while director.match.ended_at is None:
-        director.play_turns()
+        director.play_turn()
 
 
 if __name__ == '__main__':
