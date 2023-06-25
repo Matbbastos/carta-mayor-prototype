@@ -38,16 +38,24 @@ def test_source_definition(player_with_cards: Player) -> None:
 
 
 def test_playability_of_player_cards(player_with_cards: Player, table_pile: Pile) -> None:
-    assert player_with_cards.has_playable_cards(table_pile)
+    assert player_with_cards.get_playable_cards(table_pile) == {
+        Card("2", Suit.CLUBS),
+        Card("10", Suit.HEARTS),
+        Card("A", Suit.SPADES)
+        }
     player_with_cards.private_cards.clear()
-    assert player_with_cards.has_playable_cards(table_pile)
+    assert player_with_cards.get_playable_cards(table_pile) == {
+        Card("5", Suit.DIAMONDS),
+        Card("6", Suit.HEARTS),
+        Card("7", Suit.SPADES)
+        }
 
     table_pile.append(Card("9", Suit.CLUBS))
-    assert not player_with_cards.has_playable_cards(table_pile)
+    assert player_with_cards.get_playable_cards(table_pile) == set()
     player_with_cards.open_cards.clear()
-    assert player_with_cards.has_playable_cards(table_pile)
+    assert len(player_with_cards.get_playable_cards(table_pile)) == 4
 
     table_pile.append(Card("A", Suit.CLUBS))
-    assert player_with_cards.has_playable_cards(table_pile)
+    assert len(player_with_cards.get_playable_cards(table_pile)) == 4
     player_with_cards.hidden_cards.remove(Card("10", Suit.SPADES))
-    assert not player_with_cards.has_playable_cards(table_pile)
+    assert len(player_with_cards.get_playable_cards(table_pile)) == 3
