@@ -2,12 +2,23 @@ from __future__ import annotations
 
 import logging
 from collections import deque
+from dataclasses import dataclass
 
 from common.classes import Card, Pile, Player, Team
 from common.constants import CARD_LABELS
 from common.types import GameMode, PileLocation, Suit
 from interface import prompt_for_game_mode, prompt_for_FTW_players, prompt_for_FM_teams
 from match import Match
+
+
+def check_match(func):
+    def wrapper(director, *args, **kwargs):
+        if director.match is None:
+            logging.error(
+                f"Attempted to call function '{func.__name__}' with no proper Match object")
+            raise ValueError("Match must be set before using this function")
+        return func(*args, **kwargs)
+    return wrapper
 
 
 class Director:
