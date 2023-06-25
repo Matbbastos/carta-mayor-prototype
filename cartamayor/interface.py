@@ -1,4 +1,5 @@
 import os
+from common.classes import Player
 def welcome_users() -> None:
     print("Hello there, stranger! Ready to play?")
 
@@ -104,4 +105,9 @@ def clear_viewport(clearance=1.2) -> None:
     terminal_height = os.get_terminal_size()[1]
     print("\n"*round(terminal_height*clearance))
 
+
+def show_player_state(player: Player) -> None:
+    print(player.open_cards)
+    print(player.hidden_cards.masked())
+    print(player.private_cards)
 
