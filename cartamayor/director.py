@@ -187,3 +187,7 @@ class Director:
                 [None]*min(len(masked_table), MAX_VISIBLE_CARDS-visibility))
         return (len(self.match.table_pile), visible_cards)
 
+    def play_turn(self) -> None:
+        """Play a turn of actions and apply the changes to the match."""
+        pass
+
