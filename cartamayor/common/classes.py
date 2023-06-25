@@ -116,6 +116,20 @@ class Pile(deque):
         location = f"({self.location.name})"
         return f"{location:<9} Pile[{content}]"
 
+    def get_display_length(self) -> str:
+        if len(self) > 5:
+            return "5+"
+        return str(len(self))
+
+    def masked(self) -> str:
+        """Provide a masked version of the content of the Pile.
+
+        Returns:
+            str: Pile representation but for any content in it, a ▇ is used in place of its
+            original string representation.
+        """
+        return self._build_display_str("▇" for _ in self)
+
     def contains_playable_card(self, table_pile: Pile) -> bool:
         """Define whether or not a pile contains at least one playable card given the table
         pile.
