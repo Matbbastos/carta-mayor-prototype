@@ -21,15 +21,21 @@ def check_match(func):
     return wrapper
 
 
+@dataclass
 class Director:
     """
-    Defines the actions taken by the game Director in order for the match to unfold as
+    Define the actions taken by the game Director in order for the match to unfold as
     expected.
+
+    Parameters:
+        match (Match): match object to be controlled. Usually created after the Director.
+        teams (tuple[Team, Team] | None): teams that will play (only for FULL_MONTY games).
+        players (list[Player] | None): players that will play (not in teams, only for
+            FATAL_THREE_WAY).
     """
-    match: Match
-    game_mode: GameMode
-    teams: tuple[Team, Team] | None
-    players: list[Player] | None
+    match: Match | None = None
+    teams: tuple[Team, Team] | None = None
+    players: list[Player] | None = None
 
     @classmethod
     def build_deck(cls) -> list[Card]:
