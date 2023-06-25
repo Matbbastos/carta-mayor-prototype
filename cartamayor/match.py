@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 import random
 from collections import deque
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 
 from common.classes import Card, Pile, Player, PileLocation
@@ -23,6 +23,7 @@ class Match:
         deck (list[Card]): full deck of cards to be used for the game.
         table_pile (Pile): pile of cards in the table for the match.
         dead_pile (Pile): pile of dead cards, removed from the game.
+        control_flags (dict[str, bool]): control flags used for the Match.
         started_at (datetime | None): starting timestamp of the match, naive datetime.
         ended_at (datetime | None): ending timestamp of the match, naive datetime.
     """
@@ -33,6 +34,8 @@ class Match:
     dead_pile: Pile
     started_at: datetime | None = None
     ended_at: datetime | None = None
+    control_flags: dict[str, bool] = field(
+        default_factory=lambda: dict(show_previous_play=False))
 
     def __str__(self) -> str:
         started_str = "not started"
