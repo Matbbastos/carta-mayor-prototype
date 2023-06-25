@@ -1,3 +1,4 @@
+import os
 def welcome_users() -> None:
     print("Hello there, stranger! Ready to play?")
 
@@ -88,3 +89,19 @@ def prompt_for_FM_teams() -> dict[str, tuple[str, str]]:
             "(it's your time we're wasting, anyway)\n")
         return prompt_for_FM_teams()
     return teams
+
+
+def clear_viewport(clearance=1.2) -> None:
+    """
+    Attempt to clear the current terminal window by printing linebreaks to equal the
+    current window height.
+
+    Args:
+        clearance (float, optional): Enlarging factor to provide more clearance of the
+        viewport. Defaults to 1.2. Values smaller than 1 will be set to 1.
+    """
+    clearance = max(1, clearance)
+    terminal_height = os.get_terminal_size()[1]
+    print("\n"*round(terminal_height*clearance))
+
+
