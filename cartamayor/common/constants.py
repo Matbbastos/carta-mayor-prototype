@@ -2,6 +2,7 @@ import math
 from common.types import CardStats, GameMode, PileLocation
 
 
+PILE_COUNTER_LIMIT = 5
 MAX_VISIBLE_CARDS = 6
 
 CARD_LABELS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]

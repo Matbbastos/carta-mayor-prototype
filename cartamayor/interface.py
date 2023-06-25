@@ -1,5 +1,8 @@
 import os
-from common.classes import Player
+from common.classes import Card, Player
+from common.constants import PILE_COUNTER_LIMIT
+
+
 def welcome_users() -> None:
     print("Hello there, stranger! Ready to play?")
 
@@ -110,4 +113,31 @@ def show_player_state(player: Player) -> None:
     print(player.open_cards)
     print(player.hidden_cards.masked())
     print(player.private_cards)
+
+
+def get_table_display_details(
+        table_details: tuple[int, list[Card | None]],
+        dead_pile_length: int) -> tuple[str, list[str], str]:
+    """
+    Transform the table information into content ready to be displayed.
+
+    Args:
+        table_details (tuple[int, list[Card  |  None]]): Details from the current table pile
+    coming from the Director.
+        dead_pile_length (int): amount of cards in the dead pile.
+
+    Returns:
+        tuple[str, list[str], str]: Table pile length display string along with a list of
+        the display string for each visible card, and the dead pile counter string.
+    """
+    table_pile_length, visible_cards = table_details
+    table_pile_counter = f"={table_pile_length}"
+    if table_pile_length > PILE_COUNTER_LIMIT:
+        table_pile_counter = f"+{PILE_COUNTER_LIMIT}"
+    dead_pile_counter = f"={dead_pile_length}"
+    if dead_pile_length > PILE_COUNTER_LIMIT:
+        dead_pile_counter = f"+{PILE_COUNTER_LIMIT}"
+    result = [str(item) if item is not None else "▇" for item in visible_cards]
+    return (table_pile_counter, result, dead_pile_counter)
+
 
