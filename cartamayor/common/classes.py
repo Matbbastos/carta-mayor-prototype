@@ -64,9 +64,10 @@ class Pile(deque):
             location (PileLocation): location of the pile in the game.
             cards (Iterable[Card] | None): Iterable of cards to initialize the Pile.
         """
-        self.cards = cards if cards is not None else []
+        if cards is None:
+            cards = []
         self.location = location
-        super().__init__(self.cards)
+        super().__init__(cards)
 
     def __eq__(self, other: Pile) -> bool:
         """Define equality of Pile based on content and location.
