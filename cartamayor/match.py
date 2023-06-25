@@ -93,3 +93,23 @@ class Match:
         self.started_at = datetime.now()
         self.auto_bambam()
         return self
+
+    def update_initiative_queue(self, pile_killed: bool, reverse: bool) -> Match:
+        """
+        Update the initiative queue given the actions that took place during the turn.
+
+        Args:
+            pile_killed (bool): Flag to indicate whether or not the table pile was killed.
+            reverse (bool): Flag to indicate whether or not the direction of play should
+            be reversed.
+
+        Returns:
+            Match: self.
+        """
+        if not pile_killed and not reverse:
+            self.initiative_queue.rotate(-1)
+        elif reverse:
+            self.initiative_queue.rotate(-1)
+            self.initiative_queue.reverse()
+        return self
+
