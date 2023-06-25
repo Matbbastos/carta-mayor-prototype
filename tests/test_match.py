@@ -8,7 +8,7 @@ from cartamayor.match import Match
 
 def test_match_print(
         initiative_queue: deque[Player], full_deck: list[Card], table_pile: Pile) -> None:
-    full_mounty = Match(
+    full_monty = Match(
         GameMode.FULL_MONTY,
         initiative_queue,
         full_deck,
@@ -29,7 +29,7 @@ def test_match_print(
         table_pile,
         Pile(PileLocation.DEAD, []))
 
-    assert str(full_mounty) == (
+    assert str(full_monty) == (
         "FULL MONTY started at 2023-04-12 21h13 - "
         "[Player One, Player 2, Third Player, 4th Player] - Top table card: ♠5 - # Dead: 0")
     assert str(fatal_three_way) == (
