@@ -1,4 +1,8 @@
+from collections import deque
+from datetime import datetime
+
 from cartamayor.common.classes import Player, Card
+from cartamayor.common.types import GameMode
 from cartamayor.interface import (
     clear_viewport,
     get_table_display_details,
@@ -8,6 +12,8 @@ from cartamayor.interface import (
     show_player_state,
     show_table,
     welcome_users,
+    show_match_status,
+    trim_long_string,
     )
 
 
@@ -219,3 +225,80 @@ def test_table_display_details(
         "+5", ["♣2", "♢2", "♠2", "▇", "▇", "▇"], "+5")
     assert get_table_display_details(multiple_table_details[8], 8) == (
         "+5", ["♠9", "♡9", "♣9", "♣2", "♢2", "♠2"], "+5")
+
+
+def test_match_display(capsys, initiative_queue: deque[Player]) -> None:
+    show_match_status(
+        initiative_queue, GameMode.FULL_MONTY, datetime(2023, 7, 6, 17, 45, 2))
+    captured = capsys.readouterr()
+    assert captured.out == (
+        "┌────────────────────────────────────┐\n"
+        "│            MATCH STATUS            │\n"
+        "│ FULL MONTY                         │\n"
+        "│   Started at 2023-07-06 17:45:02   │\n"
+        "│                                    │\n"
+        "│   Now playing:                     │\n"
+        "│        ╰ Player One                │\n"
+        "│   Next:  ╰ Player 2                │\n"
+        "│            ╰ Third Player          │\n"
+        "│              ╰ 4th Player          │\n"
+        "└────────────────────────────────────┘\n")
+
+    show_match_status(
+        initiative_queue, GameMode.FATAL_THREE_WAY, datetime(2022, 5, 3, 2, 0, 59))
+    captured = capsys.readouterr()
+    assert captured.out == (
+        "┌────────────────────────────────────┐\n"
+        "│            MATCH STATUS            │\n"
+        "│ FATAL THREE WAY                    │\n"
+        "│   Started at 2022-05-03 02:00:59   │\n"
+        "│                                    │\n"
+        "│   Now playing:                     │\n"
+        "│        ╰ Player One                │\n"
+        "│   Next:  ╰ Player 2                │\n"
+        "│            ╰ Third Player          │\n"
+        "└────────────────────────────────────┘\n")
+
+
+def test_trim_long_string() -> None:
+    assert trim_long_string("Player One plus Cookies", 0) == ""
+    assert trim_long_string("Player One plus Cookies", 23) == "Player One plus Cookies"
+    assert trim_long_string("Player One plus Cookies", 22) == "Player One plus Coo..."
+    assert trim_long_string("Player One plus Cookies", 19) == "Player One plus ..."
+    assert trim_long_string("Player One plus Cookies", 25) == "Player One plus Cookies"
+    assert trim_long_string("Player 2 and their clone", 23) == "Player 2 and their c..."
+    assert trim_long_string("Third Player and third wheel", 21) == "Third Player and t..."
+    assert trim_long_string("May the 4th Player be with you", 19) == "May the 4th Play..."
+
+
+def test_match_display_long(capsys, long_initiative_queue: deque[Player]) -> None:
+    show_match_status(
+        long_initiative_queue, GameMode.FULL_MONTY, datetime(2025, 12, 31, 12, 21, 43))
+    captured = capsys.readouterr()
+    assert captured.out == (
+        "┌────────────────────────────────────┐\n"
+        "│            MATCH STATUS            │\n"
+        "│ FULL MONTY                         │\n"
+        "│   Started at 2025-12-31 12:21:43   │\n"
+        "│                                    │\n"
+        "│   Now playing:                     │\n"
+        "│        ╰ Player One plus Cookies   │\n"
+        "│   Next:  ╰ Player 2 and their c... │\n"
+        "│            ╰ Third Player and t... │\n"
+        "│              ╰ May the 4th Play... │\n"
+        "└────────────────────────────────────┘\n")
+
+    show_match_status(
+        long_initiative_queue, GameMode.FATAL_THREE_WAY, datetime(2030, 1, 1, 1, 1, 11))
+    captured = capsys.readouterr()
+    assert captured.out == (
+        "┌────────────────────────────────────┐\n"
+        "│            MATCH STATUS            │\n"
+        "│ FATAL THREE WAY                    │\n"
+        "│   Started at 2030-01-01 01:01:11   │\n"
+        "│                                    │\n"
+        "│   Now playing:                     │\n"
+        "│        ╰ Player One plus Cookies   │\n"
+        "│   Next:  ╰ Player 2 and their c... │\n"
+        "│            ╰ Third Player and t... │\n"
+        "└────────────────────────────────────┘\n")

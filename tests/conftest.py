@@ -158,3 +158,10 @@ def initiative_queue() -> deque[Player]:
     return deque([
         Player("Player One"), Player("Player 2"),
         Player("Third Player"), Player("4th Player")])
+
+
+@pytest.fixture
+def long_initiative_queue() -> deque[Player]:
+    return deque([
+        Player("Player One plus Cookies"), Player("Player 2 and their clone"),
+        Player("Third Player and third wheel"), Player("May the 4th Player be with you")])
