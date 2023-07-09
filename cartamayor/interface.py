@@ -1,6 +1,10 @@
 import os
+from collections import deque
+from datetime import datetime
+
 from common.classes import Card, Player
 from common.constants import PILE_COUNTER_LIMIT
+from common.types import GameMode
 
 
 def welcome_users() -> None:
@@ -180,3 +184,44 @@ def trim_long_string(string: str, max_length: int) -> str:
         return f"{string[:max_length-3]}..."
     return string
 
+
+def show_match_status(
+        initiative_queue: deque[Player], game_mode: GameMode, start_time: datetime) -> None:
+    """
+    Print the status of the current match, with game mode, when it started and player queue.
+
+    Result will be similar to:
+    ┌────────────────────────────────────┐
+    │            MATCH STATUS            │
+    │ FULL MONTY                         │
+    │   Started at 2023-12-31 23:59:59   │
+    │                                    │
+    │   Now playing:                     │
+    │        ╰ Player One                │
+    │   Next:  ╰ Player Two              │
+    │            ╰ Player Three          │
+    │              ╰ Player Four         │
+    └────────────────────────────────────┘
+
+    Args:
+        initiative_queue (deque[Player]): Initiative queue of players from the match.
+        game_mode (GameMode): Current game mode of the match.
+        start_time (datetime): Time at which the match was started.
+    """
+    game_mode_str = ' '.join(game_mode.name.split('_'))
+    display_lines = [
+        "┌────────────────────────────────────┐",
+        "│            MATCH STATUS            │",
+        f"│ {game_mode_str.ljust(35)}│",
+        f"│   Started at {start_time.strftime('%Y-%m-%d %H:%M:%S')}   │",
+        "│                                    │",
+        "│   Now playing:                     │",
+        f"│        ╰ {trim_long_string(initiative_queue[0].name, 25).ljust(26)}│",
+        f"│   Next:  ╰ {trim_long_string(initiative_queue[1].name, 23).ljust(24)}│",
+        f"│            ╰ {trim_long_string(initiative_queue[2].name, 21).ljust(22)}│"
+    ]
+    if game_mode == GameMode.FULL_MONTY:
+        display_lines.append(
+            f"│              ╰ {trim_long_string(initiative_queue[3].name, 19).ljust(20)}│")
+    display_lines.append("└────────────────────────────────────┘")
+    print("\n".join(display_lines))
