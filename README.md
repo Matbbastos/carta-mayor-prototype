@@ -1,6 +1,8 @@
 # Carta Mayor Prototype
 An attempt on a prototype of a simple terminal-based version of the great card game Carta Mayor.
 
+This version is supposed to be used in a single terminal, allowing for players to play by "switching seats" to access the terminal. Not practical, but the actual intent is to validate the structure of the game's mechanics, ensuring the rules are enforced and correct and sufficient information is displayed at each stage of the match.
+
 ---
 ## Local
 For a local version of the application, follow:
