@@ -232,4 +232,6 @@ class Team:
     players: tuple[Player, Player]
 
     def __str__(self) -> str:
-        return f"{type(self)} {self.name}: {self.players[0].name} | {self.players[1].name}"
+        return (
+            f"{type(self).__name__} {self.name}: {self.players[0].name} | "
+            f"{self.players[1].name}")

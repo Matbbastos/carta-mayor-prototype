@@ -12,7 +12,7 @@ def test_team_immutability() -> None:
 
 def test_team_print() -> None:
     team = Team("Invictus", (Player("Matheus Bruhns"), Player("Firas Mourad")))
-    assert str(team) == "Invictus: Matheus Bruhns | Firas Mourad"
+    assert str(team) == "Team Invictus: Matheus Bruhns | Firas Mourad"
     assert repr(team) == (
         "Team(name='Invictus', players=(Player(name='Matheus Bruhns', "
         "private_cards=Pile(PileLocation.PRIVATE, []), "
