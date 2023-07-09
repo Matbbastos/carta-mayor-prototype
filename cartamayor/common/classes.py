@@ -8,7 +8,7 @@ from cartamayor.common.constants import LABEL_TO_STATS
 from cartamayor.common.types import PileLocation, Suit
 
 
-@dataclass(unsafe_hash=True)
+@dataclass(unsafe_hash=True, slots=True)
 class Card:
     """A playing Card, which is identified by label and suit. Objects from this class are
     logically immutable, even though the class is not a frozen dataclasse.
@@ -176,7 +176,7 @@ class Pile(deque):
         return self
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class Player:
     """
     A player who is identified by their name, which cannot be changed after creation.
@@ -222,7 +222,7 @@ class Player:
         return source.get_playable_cards(table_pile)
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class Team:
     """
     A team of 2 Players, containing a name. Members and name cannot be changed after
