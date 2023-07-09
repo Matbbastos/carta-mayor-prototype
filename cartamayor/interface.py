@@ -161,3 +161,22 @@ def show_table(
     print("\n".join(display_lines))
 
 
+def trim_long_string(string: str, max_length: int) -> str:
+    """
+    Trims a string to a maximum length and adds trailing ellipsis (3 dots).
+    Note: if max_length < 3, an empty string is returned (not enought space for ellipsis).
+
+    Args:
+        string (str): String to be trimmed.
+        max_length (int): Final length after trimming and adding ellipsis.
+
+    Returns:
+        str: Original string trimmed to the maximum length, having the last 3 characters as
+        an ellipsis.
+    """
+    if max_length < 3:
+        return ""
+    if len(string) > max_length:
+        return f"{string[:max_length-3]}..."
+    return string
+
