@@ -2,9 +2,9 @@ import os
 from collections import deque
 from datetime import datetime
 
-from common.classes import Card, Player
-from common.constants import PILE_COUNTER_LIMIT
-from common.types import GameMode
+from cartamayor.common.classes import Card, Player
+from cartamayor.common.constants import PILE_COUNTER_LIMIT
+from cartamayor.common.types import GameMode
 
 
 def welcome_users() -> None:

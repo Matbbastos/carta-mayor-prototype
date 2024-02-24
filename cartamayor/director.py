@@ -4,11 +4,11 @@ import logging
 from collections import deque
 from dataclasses import dataclass
 
-from common.classes import Card, Pile, Player, Team
-from common.constants import CARD_LABELS, MAX_VISIBLE_CARDS
-from common.types import GameMode, PileLocation, Suit
-from interface import prompt_for_game_mode, prompt_for_FTW_players, prompt_for_FM_teams
-from match import Match
+from cartamayor.common.classes import Card, Pile, Player, Team
+from cartamayor.common.constants import CARD_LABELS, MAX_VISIBLE_CARDS
+from cartamayor.common.types import GameMode, PileLocation, Suit
+from cartamayor.interface import prompt_for_game_mode, prompt_for_FTW_players, prompt_for_FM_teams
+from cartamayor.match import Match
 
 
 def check_match(func):

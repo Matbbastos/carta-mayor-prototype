@@ -1,5 +1,5 @@
 import math
-from common.types import CardStats, GameMode, PileLocation
+from cartamayor.common.types import CardStats, GameMode, PileLocation
 
 
 PILE_COUNTER_LIMIT = 5

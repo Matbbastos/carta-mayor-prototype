@@ -5,8 +5,8 @@ import logging.config
 from argparse import ArgumentParser
 from pathlib import Path
 
-from director import Director
-from interface import welcome_users
+from cartamayor.director import Director
+from cartamayor.interface import welcome_users
 
 
 def main(args):

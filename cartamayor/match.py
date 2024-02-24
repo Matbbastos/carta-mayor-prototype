@@ -6,9 +6,9 @@ from collections import deque
 from dataclasses import dataclass, field
 from datetime import datetime
 
-from common.classes import Card, Pile, Player, PileLocation
-from common.constants import INITIAL_PILE_SIZES
-from common.types import GameMode
+from cartamayor.common.classes import Card, Pile, Player, PileLocation
+from cartamayor.common.constants import INITIAL_PILE_SIZES
+from cartamayor.common.types import GameMode
 
 
 @dataclass
