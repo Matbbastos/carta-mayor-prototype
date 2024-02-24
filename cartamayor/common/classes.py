@@ -243,7 +243,7 @@ class Player:
             table_pile (Pile): Pile of cards currently in the table.
 
         Returns:
-            set[Card]: Set of cards that from which the player can choose to play.
+            set[Card]: Set of cards from which the player can play.
         """
         source = self.get_source()
         if source.location == PileLocation.HIDDEN:
