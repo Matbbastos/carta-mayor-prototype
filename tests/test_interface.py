@@ -1,8 +1,11 @@
+import pytest
+
 from collections import deque
 from datetime import datetime
 
 from cartamayor.common.classes import Player, Card
 from cartamayor.common.types import GameMode
+from conftest import PLAYER_STATE_TEST
 from cartamayor.interface import (
     clear_viewport,
     get_table_display_details,
@@ -14,6 +17,7 @@ from cartamayor.interface import (
     welcome_users,
     show_match_status,
     trim_long_string,
+    detailed_player_state,
     )
 
 
@@ -302,3 +306,10 @@ def test_match_display_long(capsys, long_initiative_queue: deque[Player]) -> Non
         "│   Next:  ╰ Player 2 and their c... │\n"
         "│            ╰ Third Player and t... │\n"
         "└────────────────────────────────────┘\n")
+
+
+@pytest.mark.parametrize("test_input, expected", PLAYER_STATE_TEST)
+def test_detailed_player_state(capsys, test_input, expected) -> None:
+    detailed_player_state(test_input)
+    captured = capsys.readouterr()
+    assert captured.out == expected

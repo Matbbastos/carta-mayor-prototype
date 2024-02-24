@@ -7,6 +7,128 @@ from cartamayor.director import Director
 from cartamayor.match import Match
 
 
+PLAYER_STATE_TEST = [
+    (
+        Player(
+            "Sample1",
+            private_cards=Pile(
+                PileLocation.PRIVATE, [
+                    Card("2", Suit.CLUBS),
+                    Card("3", Suit.DIAMONDS),
+                    ]),
+            open_cards=Pile(
+                PileLocation.OPEN, [
+                    Card("4", Suit.DIAMONDS),
+                ]
+            ),
+            hidden_cards=Pile(PileLocation.HIDDEN, [
+                Card("2", Suit.DIAMONDS),
+                Card("3", Suit.DIAMONDS),
+                Card("4", Suit.DIAMONDS),
+                Card("5", Suit.DIAMONDS),
+            ])),
+        (
+            "Source: PRIVATE\n"
+            "│     OPEN: ♢4\n"
+            "│   HIDDEN:  ▇  ▇  ▇  ▇\n"
+            "│  PRIVATE: ♣2, ♢3\n"
+            "└───────────────────────┘\n")
+    ),
+    (
+        Player(
+            "Sample2",
+            private_cards=Pile(
+                PileLocation.PRIVATE, [
+                    Card("A", Suit.CLUBS),
+                    Card("2", Suit.DIAMONDS),
+                    Card("3", Suit.SPADES),
+                    Card("4", Suit.HEARTS),
+                    Card("5", Suit.CLUBS),
+                    Card("6", Suit.DIAMONDS),
+                    Card("7", Suit.SPADES),
+                    Card("8", Suit.HEARTS),
+                    Card("9", Suit.CLUBS),
+                    Card("10", Suit.DIAMONDS),
+                    ]),
+            open_cards=Pile(PileLocation.OPEN, []),
+            hidden_cards=Pile(PileLocation.HIDDEN, [
+                Card("2", Suit.DIAMONDS),
+                Card("3", Suit.DIAMONDS),
+                Card("4", Suit.DIAMONDS),
+                Card("5", Suit.DIAMONDS),
+            ])),
+        (
+            "Source: PRIVATE\n"
+            "│     OPEN:\n"
+            "│   HIDDEN:  ▇  ▇  ▇  ▇\n"
+            "│  PRIVATE: ♣A, ♢2, ♠3, ♡4, ♣5, ♢6, ♠7, ♡8, ♣9, ♢10\n"
+            "└───────────────────────────────────────────────────┘\n")
+    ),
+    (
+        Player(
+            "Sample3",
+            private_cards=Pile(PileLocation.PRIVATE, []),
+            open_cards=Pile(PileLocation.OPEN, []),
+            hidden_cards=Pile(PileLocation.HIDDEN, [Card("5", Suit.DIAMONDS),])),
+        (
+            "Source: HIDDEN\n"
+            "│     OPEN:\n"
+            "│   HIDDEN:  ▇\n"
+            "│  PRIVATE:\n"
+            "└──────────────┘\n")
+    ),
+    (
+        Player(
+            "Sample4",
+            private_cards=Pile(PileLocation.PRIVATE, []),
+            open_cards=Pile(
+                PileLocation.OPEN, [
+                    Card("A", Suit.CLUBS),
+                    Card("2", Suit.DIAMONDS),
+                    Card("4", Suit.HEARTS),
+                ]
+            ),
+            hidden_cards=Pile(PileLocation.HIDDEN, [
+                Card("2", Suit.DIAMONDS),
+                Card("3", Suit.DIAMONDS),
+                Card("4", Suit.DIAMONDS),
+                Card("5", Suit.DIAMONDS),
+            ])),
+        (
+            "Source: OPEN\n"
+            "│     OPEN: ♣A, ♢2, ♡4\n"
+            "│   HIDDEN:  ▇  ▇  ▇  ▇\n"
+            "│  PRIVATE:\n"
+            "└───────────────────────┘\n")
+    ),
+    (
+        Player(
+            "Sample5",
+            private_cards=Pile(
+                PileLocation.PRIVATE, [
+                    Card("A", Suit.CLUBS),
+                    Card("2", Suit.DIAMONDS),
+                    Card("3", Suit.SPADES),
+                    Card("4", Suit.HEARTS),
+                    Card("5", Suit.CLUBS),
+                    Card("6", Suit.DIAMONDS),
+                    Card("7", Suit.SPADES),
+                    Card("8", Suit.HEARTS),
+                    Card("9", Suit.CLUBS),
+                    Card("10", Suit.DIAMONDS),
+                    ]),
+            open_cards=Pile(PileLocation.OPEN, []),
+            hidden_cards=Pile(PileLocation.HIDDEN, [])),
+        (
+            "Source: PRIVATE\n"
+            "│     OPEN:\n"
+            "│   HIDDEN:\n"
+            "│  PRIVATE: ♣A, ♢2, ♠3, ♡4, ♣5, ♢6, ♠7, ♡8, ♣9, ♢10\n"
+            "└───────────────────────────────────────────────────┘\n")
+    ),
+]
+
+
 @pytest.fixture
 def full_deck() -> list[Card]:
     return Director.build_deck()
