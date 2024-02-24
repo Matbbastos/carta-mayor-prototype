@@ -129,6 +129,27 @@ class Pile(deque):
             return "5+"
         return str(len(self))
 
+    def add_cards(self, cards: list[Card]) -> Pile:
+        """
+        Add cards to the pile, keeping sorting order if relevant.
+
+        Args:
+            cards (list[Card]): New cards to add to the pile.
+
+        Returns:
+            Pile: Pile after addition of all cards to it.
+        """
+        if not self.sorted:
+            self.extend(cards)
+        else:
+            index_to_insert = 0
+            for new_card in sorted(cards, key=lambda c: c.power):
+                for card in self:
+                    if new_card.power > card.power:
+                        index_to_insert += 1
+                self.insert(index_to_insert, new_card)
+        return self
+
     def masked(self) -> str:
         """Provide a masked version of the content of the Pile.
 
