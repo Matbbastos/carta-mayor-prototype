@@ -119,6 +119,45 @@ def show_player_state(player: Player) -> None:
     print(player.private_cards)
 
 
+def detailed_player_state(player: Player) -> None:
+    """
+    Display a detailed state for the player, with all piles and their cards.
+
+    Result will be similar to:
+
+    Source: OPEN
+    │     OPEN: ♢4, ♢5, ♡6, ♠7
+    │   HIDDEN:  ▇  ▇  ▇  ▇
+    │  PRIVATE: ♡4, ♣5, ♠6, ♡7, ♠10, ♣7
+    └───────────────────────────────────┘
+
+    Args:
+        player (Player): Player who owns the cards.
+    """
+    source_name = player.get_source().location.name.upper()
+    rows_to_print = {
+        "SOURCE": f"Source: {source_name}",
+        "OPEN": "│     OPEN: ",
+        "HIDDEN": "│   HIDDEN:  ",
+        "PRIVATE": "│  PRIVATE: ",
+        "BOTTOM_RULE": "└───────────",
+    }
+    rows_to_print["OPEN"] += ", ".join(str(card) for card in player.open_cards)
+    rows_to_print["HIDDEN"] += "  ".join("▇" for _ in player.hidden_cards)
+    rows_to_print["PRIVATE"] += ", ".join(str(card) for card in player.private_cards)
+
+    extra_rulers = (
+        max([
+            len(rows_to_print["SOURCE"]),
+            len(rows_to_print["OPEN"]),
+            len(rows_to_print["HIDDEN"]),
+            len(rows_to_print["PRIVATE"])])
+        - len(rows_to_print["BOTTOM_RULE"]) + 1)
+    rows_to_print["BOTTOM_RULE"] += "─"*extra_rulers + "┘"
+    for row in rows_to_print.values():
+        print(row.rstrip())
+
+
 def get_table_display_details(
         table_details: tuple[int, list[Card | None]],
         dead_pile_length: int) -> tuple[str, list[str], str]:
