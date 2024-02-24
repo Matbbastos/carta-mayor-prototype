@@ -56,17 +56,25 @@ class Pile(deque):
     A pile of cards, in a specific location of the game.
     """
     def __init__(
-            self, location: PileLocation, cards: Iterable[Card] | None = None) -> None:
+            self,
+            location: PileLocation, cards: list[Card] | None = None, /,
+            sorted: bool = False) -> None:
         """
         Initialize pile with cards, location and owner.
 
         Args:
             location (PileLocation): location of the pile in the game.
-            cards (Iterable[Card] | None): Iterable of cards to initialize the Pile.
+            cards (list[Card] | None): List of cards to initialize the Pile.
+            Defaults to None.
+            sorted (bool): Whether or not the pile should be sorted based on card power.
+            Sorting is applied whenever adding cards as well. Defaults to False.
         """
         if cards is None:
             cards = []
         self.location = location
+        self.sorted = sorted
+        if self.sorted:
+            cards.sort(key=lambda card: card.power)
         super().__init__(cards)
 
     def __eq__(self, other: Pile) -> bool:
