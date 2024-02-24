@@ -50,4 +50,4 @@ When committing to this repository, following convention is advised:
 * revert: reverts on previous commits
 * test: updates to tests
 
-For further reference on writing good commit messages, see [Conventional Commits](www.conventionalcommits.org).
+For further reference on writing good commit messages, see [Conventional Commits](https://www.conventionalcommits.org).
