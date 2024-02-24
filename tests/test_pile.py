@@ -79,3 +79,31 @@ def test_masking(hidden_pile: Pile, dead_pile: Pile) -> None:
 
     assert str(hidden_pile.masked()) == "(HIDDEN)  Pile[▇, ▇, ▇, ▇]"
     assert str(dead_pile.masked()) == "(DEAD)    Pile[▇, ▇, ▇, ▇, ▇, ▇]"
+
+
+def test_sorted_pile() -> None:
+    p = Pile(
+        PileLocation.PRIVATE,
+        [
+            Card("10", Suit.HEARTS),
+            Card("3", Suit.DIAMONDS),
+            Card("A", Suit.SPADES),
+            Card("2", Suit.SPADES),
+            Card("4", Suit.CLUBS)],
+        sorted=True)
+    assert str(p) == "(PRIVATE) Pile[♢3, ♣4, ♠A, ♡10, ♠2]"
+
+
+def test_add_cards_to_sorted_pile() -> None:
+    p = Pile(
+        PileLocation.PRIVATE,
+        [
+            Card("10", Suit.HEARTS),
+            Card("4", Suit.CLUBS)],
+        sorted=True)
+    p.add_cards([
+        Card("3", Suit.DIAMONDS),
+        Card("2", Suit.SPADES),
+        Card("A", Suit.SPADES),
+    ])
+    assert str(p) == "(PRIVATE) Pile[♢3, ♣4, ♠A, ♡10, ♠2]"
