@@ -65,7 +65,7 @@ class Director:
             logging.critical(
                 "Fatal Three Way game mode hasn't been implemented yet, exiting")
             # TODO: implement FTW and return it here
-            raise SystemExit
+            raise NotImplementedError
         elif game_mode == "FM":
             logging.info("Full Monty game mode selected")
             return GameMode.FULL_MONTY
